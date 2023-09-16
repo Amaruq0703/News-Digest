@@ -15,6 +15,8 @@ request = requests.get(url)
 
 content = request.json()
 
+#Sent News as an email
+
 totalmessage = ''
 
 for article in content['articles'][0:20]:
