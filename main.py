@@ -1,4 +1,5 @@
 import requests
+from sendemail import send_email
 
 #Linked news API
 
@@ -11,4 +12,16 @@ request = requests.get(url)
 
 #Accessed the content from API as dictionary
 
-content = request.json
+content = request.json()
+
+totalmessage = ''
+
+for article in content['articles']:
+    sourcelist = article['source']
+    totalmessage = totalmessage + f'\nTitle: {article["title"]} \n Link: {article["url"]} \n Source: {sourcelist["name"]}\n'
+
+
+    
+totalmessage = totalmessage.encode('utf-8')
+
+send_email(message=totalmessage)
